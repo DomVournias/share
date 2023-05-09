@@ -1,0 +1,15 @@
+export const SET_AUTH_DATA = "SET_AUTH_DATA";
+export const SET_PHONE_NUMBER = "SET_PHONE_NUMBER";
+export const SET_EMAIL = "SET_EMAIL";
+export const SET_FIRST_NAME = "SET_FIRST_NAME";
+export const SET_LAST_NAME = "SET_LAST_NAME";
+export const SET_GENDER = "SET_GENDER";
+export const SET_DATE_OF_BIRTH = "SET_DATE_OF_BIRTH";
+export const SET_VEHICLE = "SET_VEHICLE";
+export const SET_PROFILE_IMAGE = "SET_PROFILE_IMAGE";
+export const SET_ACCEPTS_TERMS = "SET_ACCEPTS_TERMS";
+export const SET_VERIFICATION_ID = "SET_VERIFICATION_ID";
+export const SET_VERIFICATION_CODE = "SET_VERIFICATION_CODE";
+export const SET_STEP = "SET_STEP";
+export const SIGN_IN = "SIGN_IN";
+export const SIGN_OUT = "SIGN_OUT";

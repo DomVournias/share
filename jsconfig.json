@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": ["/*"],
+      "screens/*": ["./screens/*"],
+      "components/*": ["./components/*"],
+      "assets/*": ["./assets/*"],
+      "context/*": ["./context/*"],
+      "hooks/*": ["./hooks/*"],
+      "navigation/*": ["./navigation/*"],
+      "styles/*": ["./styles/*"],
+      "utils/*": ["./utils/*"],
+      "lib/*": ["lib/*"],
+      "underscore": ["lodash"]
+    }
+  }
+}

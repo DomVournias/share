@@ -1,0 +1,76 @@
+[
+  {
+    "loginDetails": {
+      "email": "",
+      "userName": "",
+      "password": ""
+    },
+
+    "typeOfUser": {
+      "driver": {
+        "profile": {
+          "firstName": "",
+          "lastName": "",
+          "stats": {
+            "miles": "",
+            "rides": "",
+            "travelers": ""
+          },
+          "profileImage": "",
+          "carImages": [
+            {
+              "url": ""
+            }
+          ],
+          "rating": {
+            "reviews": [
+              {
+                "firstName": "",
+                "lastName": "",
+                "message": "",
+                "ratingCount": ""
+              }
+            ]
+          }
+        },
+        "isVerified": false,
+        "verificationDetails": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "governmentId": "",
+          "vehicleLicense": "",
+          "taxiLicense": "",
+          "driversProfilePhoto": "",
+          "vehicleInsuranceDoc": ""
+        }
+      },
+      "traveler": {
+        "profile": {
+          "firstName": "",
+          "lastName": "",
+          "profileImage": "",
+          "stats": {
+            "miles": "",
+            "rides": ""
+          },
+          "reviews": [
+            {
+              "firstName": "",
+              "lastName": "",
+              "message": "",
+              "ratingCount": ""
+            }
+          ]
+        },
+        "isVerified": false,
+        "verificationDetails": {
+          "firstName": "",
+          "lastName": "",
+          "dateOfBirth": "",
+          "phone": ""
+        }
+      }
+    }
+  }
+]

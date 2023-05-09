@@ -1,20 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-reanimated";
+import "react-native-gesture-handler";
+
+import AppNavigationContainer from "navigation/AppNavigationContainer";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import ContextProviders from "context/Providers";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ContextProviders>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <BottomSheetModalProvider>
+          <AppNavigationContainer />
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
+    </ContextProviders>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
