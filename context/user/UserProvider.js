@@ -55,7 +55,7 @@ export const UserProfileProvider = ({ children }) => {
   ]);
 
   React.useEffect(() => {
-    if (!auth.currentUser && !currentUserProfile.data) {
+    if (auth.currentUser === undefined && currentUserProfile.data === null) {
       signOutCurrentUser(currentUserProfileDispatch, authDispatch);
     }
   }, []);

@@ -1,4 +1,5 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
+
 import React from "react";
 import styled from "styled-components/native";
 
@@ -10,24 +11,35 @@ const InputField = (props) => {
     props.onFocus();
   };
 
+  // console.log(numberOfLines);
   return (
-    <InputFieldStyled
-      value={props.value}
-      placeholder={props.placeholder}
-      keyboardType={props.keyboardType}
-      autoCompleteType={props.autoCompleteType}
-      onChangeText={props.onChangeText}
-      isFocused={isFocused}
-      onFocus={handleInputFocus}
-      onBlur={() => setIsFocused(false)}
-    />
+    <>
+      <InputFieldStyled
+        value={props.value}
+        placeholder={props.placeholder}
+        keyboardType={props.keyboardType}
+        autoCompleteType={props.autoCompleteType}
+        onChangeText={props.onChangeText}
+        isFocused={isFocused}
+        onFocus={handleInputFocus}
+        onBlur={() => setIsFocused(false)}
+        maxLength={props.maxLength}
+        multiline={props.textArea ? true : false}
+        numberOfLines={props.textArea ? 2 : 1}
+        style={{ textAlignVertical: props.textArea ? "top" : "center" }}
+      />
+      {props.textArea && (
+        <WordCount>{`${props.value.length}/${props.maxLength}`}</WordCount>
+      )}
+    </>
   );
 };
 
 export default InputField;
 
 const InputFieldStyled = styled(TextInput)`
-  flex: 1;
+  /* flex: 1; */
+
   min-height: 55px;
   font-size: 17px;
   padding: 12px 15px;
@@ -36,4 +48,9 @@ const InputFieldStyled = styled(TextInput)`
   border-width: 2px;
   border-color: ${(props) =>
     props.isFocused ? "rgba(0,0,0,1)" : "rgba(0,0,0,0.1)"};
+`;
+
+const WordCount = styled(Text)`
+  align-self: flex-end;
+  opacity: 0.8;
 `;

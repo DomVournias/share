@@ -22,6 +22,9 @@ import {
 } from "screens/Auth/SignUp/Steps";
 import {
   CardStyleInterpolators,
+  HeaderStyleInterpolators,
+  TransitionPresets,
+  TransitionSpecs,
   createStackNavigator,
 } from "@react-navigation/stack";
 import { CreateRide, SearchRide } from "screens/Booking";
@@ -35,11 +38,12 @@ import LoadingScreen from "screens/LoadingScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import Reviews from "screens/Reviews";
+import SettingsHeader from "components/Headers/SettingsHeader";
 import TabNavigator from "./TabNavigator";
-import settingsGroupOptions from "navigation/GroupOptions";
 import { auth } from "lib/firebase";
-import { signOutCurrentUser } from "context/auth/AuthFunctions";
 import { resetCurrentUserProfile } from "context/user/UserActions";
+import settingsGroupOptions from "navigation/GroupOptions";
+import { signOutCurrentUser } from "context/auth/AuthFunctions";
 
 // import Authorized from "./Authorized";
 // import Unauthorized from "./Unauthorized";
@@ -62,6 +66,7 @@ function AppNavigationContainer() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isSignedIn, setIsSignedIn] = React.useState(null);
 
+  const currentUser = auth;
   const signed = authData.signedIn;
   const user = currentUserProfile.data;
 
@@ -94,7 +99,7 @@ function AppNavigationContainer() {
   //   // currentUserProfile.data,
   // ]);
 
-  console.log(`\x1b[42m SignedIn navigator \x1b[0m`, user);
+  console.log(`\x1b[42m SignedIn navigator \x1b[0m`, currentUser);
 
   if (signed === null) {
     return <LoadingScreen />;
@@ -213,8 +218,28 @@ function AppNavigationContainer() {
                 }}
               />
             </Stack.Group>
+            <Stack.Group
+              screenOptions={{
+                // presentation: "card",
+                headerMode: "float",
+                cardStyleInterpolator:
+                  CardStyleInterpolators.forFadeFromBottomAndroid,
 
-            <Stack.Screen name="EditProfile" component={EditProfile} />
+                // headerStyleInterpolator:
+                //   HeaderStyleInterpolators.forNoAnimation,
+              }}
+            >
+              <Stack.Screen
+                name="EditProfile"
+                component={EditProfile}
+                options={{ header: () => <SettingsHeader /> }}
+                // options={{
+                //   title: "Edit profile",
+                //   headerTitleStyle: styles.title,
+                // }}
+              />
+            </Stack.Group>
+
             <Stack.Screen name="Reviews" component={Reviews} />
 
             {/* <Stack.Group
@@ -270,8 +295,10 @@ export default AppNavigationContainer;
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: "500",
     color: "black",
+    // backgroundColor: "pink",
+    marginLeft: -10,
   },
 });

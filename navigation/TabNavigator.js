@@ -1,8 +1,11 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Chat, Home, Profile } from "../screens";
 import { CreateRide, SearchRide } from "../screens/Booking";
-import { Octicons } from "@expo/vector-icons";
+
 import { Fontisto } from "@expo/vector-icons";
+import { FullNameRegistration } from "screens/Auth/SignUp/Steps";
+import { Octicons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 // import { PortalHost } from "@gorhom/portal";
 // import AgeRegistration from "../screens/Auth/Steps/AgeRegistration";
 // import VehicleRegistration from "../screens/Auth/Steps/VehicleRegistration";
@@ -58,8 +61,8 @@ const TabNavigator = () => (
         }}
       /> */}
       <Tab.Screen
-        name="SearchRide"
-        component={SearchRide}
+        name="FullNameRegistration"
+        component={FullNameRegistration}
         options={{
           tabBarIcon: ({ color }) => (
             <Octicons name="search" size={24} color={color} />

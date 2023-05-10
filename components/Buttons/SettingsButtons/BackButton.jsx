@@ -13,7 +13,7 @@ const BackButton = () => {
         name="arrowleft"
         size={24}
         color="black"
-        style={{ paddingLeft: 8 }}
+        style={{ paddingLeft: "4%", paddingTop: 3, paddingRight: "4%" }}
       />
     </ButtonWrapper>
   );

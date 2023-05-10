@@ -9,6 +9,7 @@ const settingsGroupOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forNoAnimation,
   headerShown: true,
   headerStatusBarHeight: 15,
+
   headerStyle: {
     borderBottomWidth: 0,
     elevation: 0,
