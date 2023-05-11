@@ -1,10 +1,11 @@
+import { Header, HeaderControls, Wrapper } from "./Header.styled";
+
 import { View } from "react-native";
-import { HeaderControls, Wrapper } from "./Header.styled";
 
 const HeaderCustomized = ({ children }) => {
   return (
     <Wrapper>
-      <HeaderControls>{children}</HeaderControls>
+      <Header>{children}</Header>
     </Wrapper>
   );
 };

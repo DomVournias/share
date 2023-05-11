@@ -1,36 +1,43 @@
 import {
-  SafeAreaView,
-  StatusBar,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+  Button,
+  ButtonIcon,
+  Header,
+  Title,
+} from "components/Headers/Header.styled";
 
 import { Animated } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
+import { StatusBar } from "react-native";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 
-const SettingsHeader = () => {
+const SettingsHeader = (props) => {
+  const navigation = useNavigation();
+
+  const handleDiscardActions = () => {
+    navigation.goBack();
+    props.onDiscard();
+  };
+  const handleSaveActions = () => {
+    props.onSave();
+  };
+
+  console.log(`\x1b[42m SettingsHeader \x1b[0m`, props);
   return (
     <Header>
       <StatusBar />
-      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.goBack()}>
-        <AntDesign
-          name="arrowleft"
-          size={24}
-          color="black"
-          style={{ paddingLeft: "4%", paddingTop: 3, paddingRight: "4%" }}
-        />
-      </TouchableOpacity>
-      <Text>SettingsHeader</Text>
+      <Button activeOpacity={0.8} onPress={handleDiscardActions}>
+        <ButtonIcon name="ios-close-sharp" size={30} color="black" />
+
+        {/* <AntDesign name="arrowleft" size={24} color="black" /> */}
+      </Button>
+      <Title>{props.title}</Title>
+      <Button activeOpacity={0.8} onPress={handleSaveActions}>
+        <ButtonIcon name="ios-checkmark-sharp" size={30} color="black" />
+      </Button>
     </Header>
   );
 };
 
 export default SettingsHeader;
-
-const Header = styled(View)`
-  background-color: pink;
-`;

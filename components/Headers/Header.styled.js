@@ -1,16 +1,51 @@
-import { StatusBar, View } from "react-native";
+import {
+  SafeAreaView,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+
+import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
 export const HeaderControls = styled(View)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-top: ${`${StatusBar.currentHeight * 1.5}px`};
   width: 100%;
-  background-color: transparent;
 `;
 
 export const Wrapper = styled(View)`
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 2%;
+`;
+
+export const Header = styled(View)`
+  /* flex: 1; */
+  position: relative;
+  min-height: ${`${StatusBar.currentHeight * 2}px`};
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  background-color: #fff;
+`;
+
+export const Title = styled(Text)`
+  font-size: 18px;
+  font-weight: 500;
+`;
+
+export const Button = styled(TouchableOpacity)`
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ButtonIcon = styled(Ionicons)`
+  padding-top: 3px;
+  padding-left: 4%;
+  padding-right: 4%;
 `;

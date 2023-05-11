@@ -1,25 +1,15 @@
-import { Chat, Home, Profile } from "../screens";
-import { CreateRide, SearchRide } from "../screens/Booking";
+import { Chat, Home, Profile } from "screens";
+import { CreateRide, SearchRide } from "screens/Booking";
 
 import { Fontisto } from "@expo/vector-icons";
 import { FullNameRegistration } from "screens/Auth/SignUp/Steps";
 import { Octicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-// import { PortalHost } from "@gorhom/portal";
-// import AgeRegistration from "../screens/Auth/Steps/AgeRegistration";
-// import VehicleRegistration from "../screens/Auth/Steps/VehicleRegistration";
-// import {
-//   EmailRegistration,
-//   FullNameRegistration,
-//   TermsAgreement,
-// } from "../screens/Auth/Steps";
-
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => (
-  <>
-    {/* <PortalHost name="bottom-sheet-modal" /> */}
+const TabNavigator = () => {
+  return (
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
@@ -51,15 +41,7 @@ const TabNavigator = () => (
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="AgeRegistration"
-        component={AgeRegistration}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Octicons name="play" size={24} color={color} />
-          ),
-        }}
-      /> */}
+
       <Tab.Screen
         name="FullNameRegistration"
         component={FullNameRegistration}
@@ -97,7 +79,7 @@ const TabNavigator = () => (
         }}
       />
     </Tab.Navigator>
-  </>
-);
+  );
+};
 
 export default TabNavigator;

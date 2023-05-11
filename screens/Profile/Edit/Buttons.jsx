@@ -7,29 +7,19 @@ import { useNavigation } from "@react-navigation/native";
 const ProfileButtons = () => {
   const navigation = useNavigation();
   return (
-    <Buttons>
-      <ButtonStyled
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate("EditProfile")}
-      >
-        <ButtonText>Edit Profile</ButtonText>
-      </ButtonStyled>
-      {/* <ButtonStyled>
-        <ButtonText>Share Profile</ButtonText>
-      </ButtonStyled> */}
-    </Buttons>
+    <EditProfileButton
+      activeOpacity={0.8}
+      onPress={() => navigation.navigate("EditProfile")}
+    >
+      <EditProfileButtonText>Edit Profile</EditProfileButtonText>
+    </EditProfileButton>
   );
 };
 
 export default ProfileButtons;
 
-const Buttons = styled(View)`
-  flex-direction: row;
-  gap: 10px;
+const EditProfileButton = styled(TouchableOpacity)`
   margin-top: 15px;
-`;
-
-const ButtonStyled = styled(TouchableOpacity)`
   background-color: #eeeeee;
   border-radius: 8px;
   width: 50%;
@@ -38,7 +28,7 @@ const ButtonStyled = styled(TouchableOpacity)`
   justify-content: center;
 `;
 
-const ButtonText = styled(Text)`
+const EditProfileButtonText = styled(Text)`
   font-size: 15px;
   font-weight: 600;
   padding: 5px 10px;

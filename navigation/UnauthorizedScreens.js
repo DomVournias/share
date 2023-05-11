@@ -1,5 +1,3 @@
-import { View, Text } from "react-native";
-import React from "react";
 import {
   AgeRegistration,
   EmailRegistration,
@@ -9,15 +7,26 @@ import {
   TermsAgreement,
   VehicleRegistration,
   WelcomeBackScreen,
-} from "../screens/Auth/Steps";
-import { createStackNavigator } from "@react-navigation/stack";
+} from "screens/Auth/SignUp/Steps";
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from "@react-navigation/stack";
+
+import React from "react";
 
 const Stack = createStackNavigator();
 
-const Unauthorized = () => {
+const UnauthorizedScreens = () => {
   return (
     <Stack.Group
       screenOptions={{
+        presentation: "card",
+        headerMode: "float",
+        cardStyleInterpolator: CardStyleInterpolators.forNoAnimation,
+        gestureEnabled: false,
+        gestureDirection: "horizontal",
+        cardOverlayEnabled: false,
         animationTypeForReplace: "push",
         animation: "slide_from_right",
         headerShown: false,
@@ -42,4 +51,4 @@ const Unauthorized = () => {
   );
 };
 
-export default Unauthorized;
+export default UnauthorizedScreens;

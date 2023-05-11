@@ -17,32 +17,33 @@ import {
 import {
   GoBackButton,
   SettingsButton,
-} from "../../components/Buttons/ProfileButtons";
+} from "components/Buttons/ProfileButtons";
 
-import { AuthContext } from "../../context/auth/AuthReducer";
-import Avatar from "./Avatar";
-import Bio from "./Bio";
+import { AuthContext } from "context/auth/AuthReducer";
+import Avatar from "components/Profile/Avatar";
+import Bio from "components/Profile/Bio";
 import { Button } from "react-native";
-import { CurrentUserProfileContext } from "../../context/user/UserReducer";
+import { CurrentUserProfileContext } from "context/user/UserReducer";
 import { Dimensions } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Fragment } from "react";
-import HeaderCustomized from "../../components/Headers/HeaderCustomized";
+import HeaderCustomized from "components/Headers/HeaderCustomized";
 import { Image } from "react-native";
-import Name from "./Name";
+import Name from "components/Profile/Name";
 import { Portal } from "@gorhom/portal";
-import ProfileButtons from "./Edit/Buttons";
-import Rating from "./Rating";
+import ProfileButtons from "screens/Profile/Edit/Buttons";
+import ProfileHeader from "components/Headers/ProfileHeader";
+import Rating from "components/Profile/Rating";
 import React from "react";
-import Reviews from "./Reviews";
+import Reviews from "components/Profile/Reviews";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Settings from "../AllSettings/Settings";
-import Statistics from "./Stats";
-import Vehicle from "./Vehicle";
-import Verifications from "./Verifications";
-import { auth } from "../../lib/firebase";
-import { signOutCurrentUser } from "../../context/auth/AuthFunctions";
+import Settings from "screens/AllSettings/Settings";
+import Statistics from "components/Profile/Stats";
+import Vehicle from "components/Profile/Vehicle";
+import Verifications from "components/Profile/Verifications";
+import { auth } from "lib/firebase";
+import { signOutCurrentUser } from "context/auth/AuthFunctions";
 import styled from "styled-components/native";
 import { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -83,31 +84,20 @@ const Profile = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      headerStatusBarHeight: 0,
-      headerTransparent: true,
-      title: "",
-      animationTypeForReplace: "push",
-      animation: "slide_from_right",
-      headerShadowVisible: false,
-      headerStyle: {
-        backgroundColor: "transparent",
-      },
-      header: () => (
-        <HeaderCustomized>
-          <GoBackButton />
-          <SettingsButton settingsModalRef={settingsModalRef} />
-        </HeaderCustomized>
-      ),
+      header: () => <ProfileHeader settingsModalRef={settingsModalRef} />,
     });
   }, [navigation]);
 
   // User Profile data
-
-  const bio = currentUserProfile?.data?.bio;
-  const vehicle = currentUserProfile?.data?.vehicle;
-  const stats = currentUserProfile?.data?.stats;
-  const verifications = currentUserProfile?.data?.verifications;
-  const reviews = currentUserProfile?.data?.reviews;
+  const firstName = user.firstName;
+  const lastName = user.lastName;
+  const gender = user.gender;
+  const profileImage = user.profileImage;
+  const bio = user.bio;
+  const vehicle = user.vehicle;
+  const stats = user.stats;
+  const verifications = user.verifications;
+  const reviews = user.reviews;
 
   // let rawRating = profile.reviews.reduce(
   //   (sum, review) => sum + review.rating.overall,
@@ -146,15 +136,25 @@ const Profile = () => {
 
   return (
     <Container>
-      <Avatar image={user?.profileImage} />
+      <Avatar image={profileImage} />
       <Info>
-        <Name
-          firstName={user?.firstName}
-          lastName={user?.lastName[0]}
-          isVerified={true}
-        />
+        <Name firstName={firstName} lastName={lastName[0]} isVerified={true} />
         <Bio bio={bio} />
-        <ProfileButtons />
+        <EditProfileButton
+          activeOpacity={0.8}
+          onPress={() =>
+            navigation.navigate("EditProfile", {
+              profileImage,
+              firstName,
+              lastName,
+              gender,
+              bio,
+              vehicle,
+            })
+          }
+        >
+          <EditProfileButtonText>Edit Profile</EditProfileButtonText>
+        </EditProfileButton>
       </Info>
       <ScrollView>
         <Statistics stats={stats} />
@@ -199,4 +199,20 @@ const Info = styled(View)`
   align-items: center;
   background-color: white;
   padding: 15px 30px;
+`;
+
+const EditProfileButton = styled(TouchableOpacity)`
+  margin-top: 15px;
+  background-color: #eeeeee;
+  border-radius: 8px;
+  width: 50%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+`;
+
+const EditProfileButtonText = styled(Text)`
+  font-size: 15px;
+  font-weight: 600;
+  padding: 5px 10px;
 `;

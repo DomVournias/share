@@ -1,12 +1,13 @@
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
+
+import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
 import styled from "styled-components/native";
-import { MaterialIcons } from "@expo/vector-icons";
 
 const Name = ({ firstName, lastName, isVerified }) => {
   return (
     <DisplayName>
-      {`${firstName} ${lastName}.`}{" "}
+      {`${firstName} ${lastName}.`}
       {isVerified && (
         <MaterialIcons name="verified" size={20} color="#199de5" />
       )}

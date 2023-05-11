@@ -1,7 +1,8 @@
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
+
 import React from "react";
-import styled from "styled-components/native";
 import { StatusBar } from "react-native";
+import styled from "styled-components/native";
 
 const Avatar = ({ image }) => {
   return (
@@ -22,7 +23,7 @@ const Container = styled.View`
   align-items: center;
   background-color: #fff;
   overflow: hidden;
-  padding-top: ${`${StatusBar.currentHeight * 2.5}px`};
+  /* padding-top: ${`${StatusBar.currentHeight * 2.5}px`}; */
 `;
 
 const ProfileImage = styled.Image`

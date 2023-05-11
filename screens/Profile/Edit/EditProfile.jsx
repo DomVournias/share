@@ -1,6 +1,8 @@
 import { Column, Container, Row } from "styles/Global.styles";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 
+import ButtonField from "components/Inputs/ButtonField";
+import { CardStyleInterpolators } from "@react-navigation/stack";
 import { CurrentUserProfileContext } from "context/user/UserReducer";
 import InputField from "components/Inputs/InputField";
 import { Keyboard } from "react-native";
@@ -8,37 +10,79 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Pressable } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native";
+import SettingsHeader from "components/Headers/SettingsHeader";
 import { StatusBar } from "react-native";
 import { avatar } from "assets/imageLinks";
 import styled from "styled-components/native";
+import { useNavigation } from "@react-navigation/native";
 
-const EditProfile = () => {
-  const { currentUserProfile } = React.useContext(CurrentUserProfileContext);
+const EditProfile = ({ route }) => {
+  const navigation = useNavigation();
 
-  const userData = currentUserProfile.data;
+  const { title } = route.params;
 
-  const [tempUserData, setTempUserData] = React.useState({
-    firstName: userData.firstName,
-    lastName: userData.lastName,
-    bio: userData.bio,
-  });
+  React.useLayoutEffect(() => {
+    const updateHeaderOptions = () => {
+      navigation.setOptions({
+        headerMode: "float",
+        cardStyleInterpolator: CardStyleInterpolators.forFadeFromBottomAndroid,
+        header: () => (
+          <SettingsHeader
+            onDiscard={discardSettingsUpdates}
+            onSave={saveSettingsUpdates}
+            title={title}
+          />
+        ),
+      });
+    };
 
-  const handleChangeTempUserData = (type, text) => {
-    setTempUserData((prevTempUserData) => ({
-      ...prevTempUserData,
-      [type]: text,
-    }));
-  };
+    updateHeaderOptions();
+  }, [navigation, discardSettingsUpdates, saveSettingsUpdates]);
 
-  const updateCurrentUserProfileData = () => {};
+  // const { currentUserProfile } = React.useContext(CurrentUserProfileContext);
 
-  console.log(tempUserData);
+  // const userData = currentUserProfile.data;
+
+  const { profileImage, firstName, lastName, gender, bio, vehicle } =
+    route.params;
+
+  // const [tempUserData, setTempUserData] = React.useState({
+  //   firstName: userData.firstName,
+  //   lastName: userData.lastName,
+  //   bio: userData.bio,
+  //   gender: {
+  //     binary: userData.gender.binary,
+  //     isBinary: userData.gender.isBinary,
+  //     nonBinary: userData.gender.nonBinary,
+  //   },
+  //   vehicle: {
+  //     brand: userData.vehicle.brand,
+  //     color: userData.vehicle.color,
+  //     hasVehicle: userData.vehicle.hasVehicle,
+  //     photo: userData.vehicle.photo,
+  //     year: userData.vehicle.year,
+  //   },
+  // });
+
+  // const handleChangeTempUserData = (type, text) => {
+  //   setTempUserData((prevTempUserData) => ({
+  //     ...prevTempUserData,
+  //     [type]: text,
+  //   }));
+  // };
+
+  const discardSettingsUpdates = () => {};
+  const saveSettingsUpdates = () => {};
+
+  // console.log(userData);
+  console.log(`\x1b[46m Profile \x1b[0m`, route);
+
   return (
     <Container>
       <Pressable onPress={Keyboard.dismiss}>
         <ProfilePhoto>
           <PhotoFrame activeOpacity={0.9}>
-            <Photo source={{ uri: avatar }} width={80} height={80} />
+            <Photo source={{ uri: profileImage }} width={80} height={80} />
             <Icon>
               <MaterialIcons
                 name="photo-camera"
@@ -52,36 +96,95 @@ const EditProfile = () => {
           </TouchableOpacity>
         </ProfilePhoto>
         <Fields>
+          <Field></Field>
           <Field>
-            <Label>First name</Label>
-            <InputField
-              value={tempUserData.firstName}
+            <Label>Full name</Label>
+            {/* <InputField
+              editable={false}
+              isButton={true}
+              value={tempUserData.firstName + " " + tempUserData.lastName}
               onFocus={() => null}
               onChangeText={(text) =>
                 handleChangeTempUserData("firstName", text)
               }
+            /> */}
+            <ButtonField
+              text={firstName + " " + lastName}
+              onPress={() =>
+                navigation.navigate("EditProfileFullName", {
+                  params: { title: "Name" },
+                })
+              }
             />
           </Field>
+
           <Field>
-            <Label>Last name</Label>
-            <InputField
-              value={tempUserData.lastName}
+            <Label>Gender</Label>
+            <ButtonField
+              text={gender.isBinary ? gender.binary : gender.nonBinary}
+              onPress={() =>
+                navigation.navigate("EditProfileGender", {
+                  params: { title: "Name" },
+                })
+              }
+            />
+            {/* <InputField
+              value={
+                tempUserData.gender.isBinary
+                  ? tempUserData.gender.binary
+                  : tempUserData.gender.nonBinary
+              }
               onFocus={() => null}
               onChangeText={(text) =>
                 handleChangeTempUserData("lastName", text)
               }
-            />
+            /> */}
           </Field>
           <Field>
             <Label>Bio</Label>
-            <InputField
+            <ButtonField
+              text={bio === "" ? "Write something about yourself" : bio}
+              onPress={() =>
+                navigation.navigate("EditProfileBio", {
+                  params: { title: "Name" },
+                })
+              }
+            />
+            {/* <InputField
               textArea={true}
+              hasCounter={false}
               maxLength={150}
               placeholder="Write something about yourself!"
               value={tempUserData.bio}
               onFocus={() => null}
               onChangeText={(text) => handleChangeTempUserData("bio", text)}
+            /> */}
+          </Field>
+          <Field>
+            <Label>Vehicle</Label>
+            <ButtonField
+              text={
+                vehicle.hasVehicle
+                  ? `${vehicle.brand} ${vehicle.year} - ${vehicle.color}`
+                  : "No vehicle"
+              }
+              onPress={() =>
+                navigation.navigate("EditProfileVehicle", {
+                  params: { title: "Name" },
+                })
+              }
             />
+            {/* <InputField
+              value={
+                tempUserData.vehicle.hasVehicle
+                  ? `${tempUserData.vehicle.brand} ${tempUserData.vehicle.year} - ${tempUserData.vehicle.color}`
+                  : "No vehicle"
+              }
+              onFocus={() => null}
+              onChangeText={(text) =>
+                handleChangeTempUserData("lastName", text)
+              }
+            /> */}
           </Field>
         </Fields>
       </Pressable>
