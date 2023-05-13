@@ -150,6 +150,7 @@ const Profile = () => {
               gender,
               bio,
               vehicle,
+              title: "Edit profile",
             })
           }
         >

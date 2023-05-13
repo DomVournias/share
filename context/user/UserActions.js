@@ -30,6 +30,27 @@ export const updateCurrentUserProfile = (dispatch, { userData }) => {
   });
 };
 
+export const setTempUserProfileFullName = (dispatch, payload) => {
+  dispatch({
+    type: "SET_TEMP_USER_PROFILE_FULL_NAME",
+    payload,
+  });
+};
+
+export const updateCurrentUserProfileFirstName = (dispatch, action) => {
+  dispatch({
+    type: "UPDATE_CURRENT_USER_PROFILE_FIRST_NAME",
+    payload: action,
+  });
+};
+
+export const updateCurrentUserProfileLastName = (dispatch, action) => {
+  dispatch({
+    type: "UPDATE_CURRENT_USER_PROFILE_FIRST_LAST_NAME",
+    payload: action,
+  });
+};
+
 export const updateCurrentUserProfileImage = (dispatch, action) => {
   dispatch({
     type: "UPDATE_CURRENT_USER_PROFILE_IMAGE",

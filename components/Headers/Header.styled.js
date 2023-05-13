@@ -34,8 +34,9 @@ export const Header = styled(View)`
 `;
 
 export const Title = styled(Text)`
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
+  padding-left: 5px;
 `;
 
 export const Button = styled(TouchableOpacity)`
@@ -48,4 +49,10 @@ export const ButtonIcon = styled(Ionicons)`
   padding-top: 3px;
   padding-left: 4%;
   padding-right: 4%;
+`;
+
+export const InnerLeft = styled(View)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;

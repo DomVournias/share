@@ -3,16 +3,33 @@ import {
   RESET_CURRENT_USER_PROFILE,
   SET_CURRENT_USER_PROFILE,
   SET_CURRENT_USER_PROFILE_TYPE,
-  UPDATE_CURRENT_USER_PROFILE_FIRST_NAME,
+  SET_TEMP_USER_PROFILE_FULL_NAME,
   UPDATE_CURRENT_USER_PROFILE_IMAGE,
-  UPDATE_CURRENT_USER_PROFILE_LAST_NAME,
 } from "./types";
 
 import { createContext } from "react";
 
-const initialCurrentUserProfileSettings = {
+const initialTemptUserProfileState = {
+  phoneNumber: "",
+  verificationId: "",
+  verificationCode: "",
+  message: "",
   firstName: "",
   lastName: "",
+  gender: {
+    isBinary: false,
+    binary: "",
+    nonBinary: "",
+  },
+  dateOfBirth: "",
+  vehicle: {
+    hasVehicle: false,
+    brand: "",
+    year: "",
+    color: "",
+  },
+  email: "",
+  avatar: "",
   profileImage: {
     imgURI: "",
     remoteURL: "",
@@ -25,8 +42,11 @@ const initialCurrentUserProfileSettings = {
   },
 };
 
+const initialCurrentUserProfileSettings = {};
+
 export const initialCurrentUserProfileState = {
   data: null,
+  tempData: initialTemptUserProfileState,
   settings: initialCurrentUserProfileSettings,
   refetch: false,
   userType: "rider",
@@ -45,29 +65,23 @@ export const CurrentUserProfileReducer = (state, action) => {
         ...state,
         userType: action.payload,
       };
-    case UPDATE_CURRENT_USER_PROFILE_FIRST_NAME:
+    case SET_TEMP_USER_PROFILE_FULL_NAME:
       return {
         ...state,
-        settings: {
-          ...state.settings,
-          firstName: action.payload,
+        tempData: {
+          ...state.tempData,
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
         },
       };
-    case UPDATE_CURRENT_USER_PROFILE_LAST_NAME:
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          lastName: action.payload,
-        },
-      };
+
     case UPDATE_CURRENT_USER_PROFILE_IMAGE:
       return {
         ...state,
-        settings: {
-          ...state.settings,
+        tempData: {
+          ...state.tempData,
           profileImage: {
-            ...state.settings.profileImage,
+            ...state.tempData.profileImage,
             ...action.payload,
           },
         },
@@ -83,7 +97,7 @@ export const CurrentUserProfileReducer = (state, action) => {
       return {
         ...state,
         data: null,
-        settings: initialCurrentUserProfileSettings,
+        tempData: initialCurrentUserProfileSettings,
       };
   }
 };
