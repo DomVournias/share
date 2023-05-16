@@ -19,18 +19,18 @@ export const HeaderControls = styled(View)`
 export const Wrapper = styled(View)`
   padding-left: 4%;
   padding-right: 4%;
-  padding-top: 2%;
 `;
 
 export const Header = styled(View)`
   /* flex: 1; */
   position: relative;
-  min-height: ${`${StatusBar.currentHeight * 2}px`};
+  padding-top: 2%;
+  min-height: ${`${StatusBar.currentHeight * 2.2}px`};
   flex-direction: row;
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  background-color: #fff;
+  background-color: ${(props) => props.color};
 `;
 
 export const Title = styled(Text)`

@@ -17,6 +17,7 @@ import CenterMapLocation from "../components/Buttons/HomeButtons/CenterMapLocati
 import { CurrentUserProfileContext } from "../context/user/UserReducer";
 import FooterHome from "../components/Footers/FooterHome";
 import HeaderCustomized from "../components/Headers/HeaderCustomized";
+import HomeHeader from "components/Headers/HomeHeader";
 import { LoadingContext } from "context/loading/LoadingProvider";
 import MainMap from "../components/Maps/MainMap";
 import ProfileButton from "../components/Buttons/HomeButtons/ProfileButton";
@@ -49,13 +50,7 @@ const Home = () => {
       headerStyle: {
         backgroundColor: "transparent",
       },
-      header: () => (
-        <HeaderCustomized>
-          <CenterMapLocation />
-          <ToggleUserTypeButton />
-          <ProfileButton />
-        </HeaderCustomized>
-      ),
+      header: () => <HomeHeader />,
     });
   }, [navigation]);
 

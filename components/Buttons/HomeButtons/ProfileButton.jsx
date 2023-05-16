@@ -8,7 +8,7 @@ import { avatar } from "../../../assets/imageLinks";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 
-const ProfileButton = () => {
+const ProfileButton = (props) => {
   const navigation = useNavigation();
   // const { currentUserProfile } = React.useContext(CurrentUserProfileContext);
   const { currentUserProfile } = React.useContext(CurrentUserProfileContext);
@@ -34,8 +34,8 @@ const ProfileButton = () => {
         source={{
           uri: currentUserProfile?.data?.profileImage,
         }}
-        width={47}
-        height={47}
+        width={props.width}
+        height={props.width}
       />
     </Wrapper>
   );
