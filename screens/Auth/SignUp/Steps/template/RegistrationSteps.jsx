@@ -1,4 +1,12 @@
-import { Keyboard, Pressable, StatusBar, Text, View } from "react-native";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Pressable,
+  ScrollView,
+  StatusBar,
+  Text,
+  View,
+} from "react-native";
 
 import React from "react";
 import StepsButton from "components/Buttons/FormButtons";
@@ -16,9 +24,12 @@ export const RegistrationSteps = ({
 }) => {
   return (
     <Container onPress={Keyboard.dismiss}>
-      {!disableSteps && !null && !undefined && <StepsProgress />}
-      <Main>{children}</Main>
-      <Footer>
+      <View>
+        {!disableSteps && !null && !undefined && <StepsProgress />}
+        <Main>{children}</Main>
+      </View>
+
+      <Footer behavior="height">
         <StepsButton
           onPress={onPressBack}
           forward={false}
@@ -38,6 +49,8 @@ export const RegistrationSteps = ({
 const Container = styled(Pressable)`
   flex: 1;
   position: relative;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: white;
   padding-top: ${`${StatusBar.currentHeight + 10}px`};
   padding-left: 30px;
@@ -47,13 +60,15 @@ const Container = styled(Pressable)`
 
 const Main = styled(View)`
   gap: 15px;
+  align-self: flex-start;
 `;
 
-const Footer = styled(View)`
+const Footer = styled(KeyboardAvoidingView)`
   flex-direction: row;
   align-self: center;
   width: 100%;
   justify-content: space-between;
-  position: absolute;
-  bottom: 20px;
+  padding-top: 30px;
+  /* position: absolute;
+  bottom: 20px; */
 `;
