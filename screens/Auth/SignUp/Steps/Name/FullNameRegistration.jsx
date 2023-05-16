@@ -1,4 +1,11 @@
-import { Keyboard, Pressable, StatusBar, Text, View } from "react-native";
+import {
+  Keyboard,
+  Pressable,
+  ScrollView,
+  StatusBar,
+  Text,
+  View,
+} from "react-native";
 import {
   setAuthFirstName,
   setAuthGender,
@@ -7,6 +14,7 @@ import {
 } from "context/auth/AuthActions";
 
 import { AuthContext } from "context/auth/AuthReducer";
+import GenderInputs from "components/Inputs/Gender/GenderInputs";
 import InputField from "components/Inputs/InputField";
 import { MessageContext } from "context/message/MessageReducer";
 import React from "react";
@@ -54,33 +62,6 @@ const FullNameRegistration = () => {
       .catch((error) => {
         console.error(`registerFullName error: ${error.message}`);
       });
-  };
-
-  const handleAuthGender = (isBinary, gender) => {
-    if (isBinary) {
-      setAuthGender(authDispatch, {
-        isBinary: true,
-        binary: gender,
-        nonBinary: "",
-      });
-    } else {
-      setAuthGender(authDispatch, {
-        isBinary: false,
-        binary: "",
-        nonBinary: gender,
-      });
-    }
-  };
-
-  const changeButtonColors = (mode, gender) => {
-    if (authData.data.gender.binary === gender) {
-      return "rgba(0,0,0,1)";
-    } else {
-      if (mode === "color") {
-        return "rgba(0,0,0,0.4)";
-      }
-      return "rgba(0, 0, 0, 0.1)";
-    }
   };
 
   const disableNext = () => {
@@ -131,35 +112,11 @@ const FullNameRegistration = () => {
         onChangeText={(text) => setFullName(text, "lastName")}
       />
 
-      <GenderSelection>
-        <Gender
-          activeOpacity={0.9}
-          onPress={() => handleAuthGender(true, "male")}
-          color={changeButtonColors("border", "male")}
-        >
-          <GenderText color={changeButtonColors("color", "male")}>
-            Άνδρας
-          </GenderText>
-        </Gender>
-        <Gender
-          activeOpacity={0.9}
-          onPress={() => handleAuthGender(true, "female")}
-          color={changeButtonColors("border", "female")}
-        >
-          <GenderText color={changeButtonColors("color", "female")}>
-            Γυναίκα
-          </GenderText>
-        </Gender>
-        <InputField
-          placeholder="'Αλλο"
-          keyboardType="default"
-          autoCompleteType="gender
-          "
-          onFocus={() => null}
-          value={authData.data.gender.nonBinary}
-          onChangeText={(text) => handleAuthGender(false, text)}
-        />
-      </GenderSelection>
+      <GenderInputs
+        mode={"auth"}
+        tempGender={authData.data.gender}
+        setTempGender={() => null}
+      />
     </RegistrationSteps>
   );
 };
