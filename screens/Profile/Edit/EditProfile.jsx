@@ -30,6 +30,22 @@ import { useNavigation } from "@react-navigation/native";
 const EditProfile = ({ route }) => {
   const navigation = useNavigation();
 
+  const { currentUserProfile } = React.useContext(CurrentUserProfileContext);
+
+  const userData = currentUserProfile.data;
+  const tempData = currentUserProfile.tempData;
+
+  const discardSettingsUpdates = () => {};
+  const saveSettingsUpdates = () => {};
+
+  const {
+    displayFirstName,
+    displayLastName,
+    displayGenderBinary,
+    displayGenderIsBinary,
+    displayGenderNonBinary,
+  } = useDisplayValue(userData, tempData);
+
   React.useLayoutEffect(() => {
     const updateHeaderOptions = () => {
       navigation.setOptions({
@@ -49,26 +65,20 @@ const EditProfile = ({ route }) => {
   }, [
     navigation,
     route,
-    displayFirstName,
-    displayLastName,
+    userData,
+    tempData,
+    useDisplayValue,
     discardSettingsUpdates,
     saveSettingsUpdates,
   ]);
 
-  const { currentUserProfile } = React.useContext(CurrentUserProfileContext);
+  console.log(`\x1b[41m Gender display \x1b[0m`, displayGenderBinary);
 
-  const userData = currentUserProfile.data;
-  const tempData = currentUserProfile.tempData;
+  console.log(`\x1b[41m Gender display \x1b[0m`, displayGenderIsBinary);
 
-  const discardSettingsUpdates = () => {};
-  const saveSettingsUpdates = () => {};
+  console.log(`\x1b[41m Gender display \x1b[0m`, displayGenderNonBinary);
 
-  const displayFirstName = useDisplayValue(
-    tempData.firstName,
-    userData.firstName
-  );
-
-  const displayLastName = useDisplayValue(tempData.lastName, userData.lastName);
+  console.log(`\x1b[46m Userdata \x1b[0m`, userData.gender);
 
   return (
     <Container>
@@ -111,11 +121,17 @@ const EditProfile = ({ route }) => {
             <Label>Gender</Label>
             <ButtonField
               text={
-                userData.gender.isBinary
-                  ? userData.gender.binary
-                  : userData.gender.nonBinary
+                displayGenderIsBinary
+                  ? displayGenderBinary
+                  : displayGenderNonBinary
               }
-              onPress={() => navigation.navigate("EditProfileGender")}
+              onPress={() =>
+                navigation.navigate("EditProfileGender", {
+                  displayGenderBinary,
+                  displayGenderIsBinary,
+                  displayGenderNonBinary,
+                })
+              }
             />
             {/* <InputField
               value={
