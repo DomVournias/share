@@ -1,5 +1,9 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { setAuthLoading, setLoading } from "context/loading/LoadingActions";
+import {
+  signInCurrentUser,
+  signOutCurrentUser,
+} from "context/auth/AuthFunctions";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { avatar } from "assets/imageLinks";
@@ -7,7 +11,6 @@ import { db } from "lib/firebase";
 import { setCurrentUserProfile } from "context/user/UserActions";
 import { setMessage } from "context/message/MessageActions";
 import { setRegistrationStep } from "context/auth/AuthActions";
-import { signInCurrentUser } from "context/auth/AuthFunctions";
 import { updateProfile } from "firebase/auth";
 
 export const fetchCurrentUserProfile = async (
@@ -29,6 +32,7 @@ export const fetchCurrentUserProfile = async (
       setMessage(messageDispatch, "User set successfully!");
       setLoading(loadingDispatch, false);
     } else {
+      // signOutCurrentUser(currentUserProfileDispatch, authDispatch);
       // setUser(null);
       setMessage(messageDispatch, "User not found.");
       setLoading(loadingDispatch, false);
@@ -66,9 +70,9 @@ export const createNewUser = async (
       dateOfBirth: contextUser.dateOfBirth,
       bio: "",
       stats: {
-        drives: 240,
-        rides: 25,
-        miles: 1200,
+        drives: 0,
+        rides: 0,
+        miles: 0,
         responseRate: 0,
         responseTime: 0,
       },
@@ -83,45 +87,45 @@ export const createNewUser = async (
         governmentId: "",
       },
       reviews: [
-        {
-          uid: "",
-          userType: "driver",
-          profileImage: avatar,
-          firstName: "Alex",
-          lastName: "Pahatouridhs",
-          comment: "The passenger was awsome, he was on time.",
-          trip: {
-            start: "Thessaloniki",
-            finish: "Athens",
-            date: today,
-          },
-          rating: {
-            overall: 4.5,
-            safety: 5,
-            communication: 4.5,
-            timeliness: 5,
-          },
-        },
-        {
-          uid: "",
-          userType: "rider",
-          profileImage: avatar,
-          firstName: "Ioanna",
-          lastName: "Anastasiou",
-          comment:
-            "Very dirty vehicle, the driver was good but we couldn't stand the smell!",
-          trip: {
-            start: "Xanthi",
-            finish: "Thessaloniki",
-            date: today,
-          },
-          rating: {
-            overall: 3.5,
-            safety: 2,
-            communication: 3.5,
-            timeliness: 3,
-          },
-        },
+        // {
+        //   uid: "",
+        //   userType: "driver",
+        //   profileImage: avatar,
+        //   firstName: "Alex",
+        //   lastName: "Pahatouridhs",
+        //   comment: "The passenger was awsome, he was on time.",
+        //   trip: {
+        //     start: "Thessaloniki",
+        //     finish: "Athens",
+        //     date: today,
+        //   },
+        //   rating: {
+        //     overall: 4.5,
+        //     safety: 5,
+        //     communication: 4.5,
+        //     timeliness: 5,
+        //   },
+        // },
+        // {
+        //   uid: "",
+        //   userType: "rider",
+        //   profileImage: avatar,
+        //   firstName: "Ioanna",
+        //   lastName: "Anastasiou",
+        //   comment:
+        //     "Very dirty vehicle, the driver was good but we couldn't stand the smell!",
+        //   trip: {
+        //     start: "Xanthi",
+        //     finish: "Thessaloniki",
+        //     date: today,
+        //   },
+        //   rating: {
+        //     overall: 3.5,
+        //     safety: 2,
+        //     communication: 3.5,
+        //     timeliness: 3,
+        //   },
+        // },
       ],
       vehicle: {
         hasVehicle: contextUser.vehicle.hasVehicle,

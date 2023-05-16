@@ -16,7 +16,7 @@ const InputField = (props) => {
     <>
       <InputFieldStyled
         value={props.value}
-        editable={props.editable}
+        editable={props.editable || true}
         placeholder={props.placeholder}
         keyboardType={props.keyboardType}
         autoCompleteType={props.autoCompleteType}

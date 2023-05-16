@@ -23,17 +23,24 @@ export const setCurrentUserProfileType = (dispatch, action) => {
   }
 };
 
-export const updateCurrentUserProfile = (dispatch, { userData }) => {
-  dispatch({
-    type: "UPDATE_CURRENT_USER_PROFILE",
-    payload: userData,
-  });
-};
-
 export const setTempUserProfileFullName = (dispatch, payload) => {
   dispatch({
     type: "SET_TEMP_USER_PROFILE_FULL_NAME",
     payload,
+  });
+};
+
+export const setTempUserProfileGender = (dispatch, data) => {
+  dispatch({
+    type: "SET_TEMP_USER_PROFILE_GENDER",
+    payload: { gender: data },
+  });
+};
+
+export const updateCurrentUserProfile = (dispatch, { userData }) => {
+  dispatch({
+    type: "UPDATE_CURRENT_USER_PROFILE",
+    payload: userData,
   });
 };
 

@@ -1,15 +1,39 @@
 import React from "react";
 
-export const useDisplayValue = (tempValue, userValue) => {
-  const [displayValue, setDisplayValue] = React.useState(userValue);
+export const useDisplayValue = (userData, tempData) => {
+  const displayFirstName =
+    userData.firstName !== tempData.firstName && tempData.firstName !== ""
+      ? tempData.firstName
+      : userData.firstName;
 
-  React.useEffect(() => {
-    if (tempValue !== userValue && tempValue !== "") {
-      setDisplayValue(tempValue);
-    } else {
-      setDisplayValue(userValue);
-    }
-  }, [tempValue, userValue]);
+  const displayLastName =
+    userData.lastName !== tempData.lastName && tempData.lastName !== ""
+      ? tempData.lastName
+      : userData.lastName;
 
-  return displayValue;
+  const displayGenderBinary =
+    userData.gender.binary !== tempData.gender.binary &&
+    tempData.gender.binary !== ""
+      ? tempData.gender.binary
+      : userData.gender.binary;
+
+  const displayGenderIsBinary =
+    tempData.gender.isBinary !== null &&
+    userData.gender.isBinary !== tempData.gender.isBinary
+      ? tempData.gender.isBinary
+      : userData.gender.isBinary;
+
+  const displayGenderNonBinary =
+    userData.gender.nonBinary !== tempData.gender.nonBinary &&
+    tempData.gender.nonBinary !== ""
+      ? tempData.gender.nonBinary
+      : userData.gender.nonBinary;
+
+  return {
+    displayFirstName,
+    displayLastName,
+    displayGenderBinary,
+    displayGenderIsBinary,
+    displayGenderNonBinary,
+  };
 };
