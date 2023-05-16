@@ -1,15 +1,16 @@
 import * as Updates from "expo-updates";
+
 import { PhoneAuthProvider, signOut } from "firebase/auth/react-native";
 import { auth, db } from "../../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { setAuthPhoneNumber, setAuthVerificationId } from "./AuthActions";
 
+import { AppState } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { resetCurrentUserProfile } from "../user/UserActions";
 import { setLoading } from "../loading/LoadingActions";
 import { setMessage } from "../message/MessageActions";
 import { signInWithCredential } from "firebase/auth";
-import { AppState } from "react-native";
 import { useEffect } from "react";
 
 export const signInCurrentUser = async (authDispatch) => {

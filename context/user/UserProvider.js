@@ -47,18 +47,46 @@ export const UserProfileProvider = ({ children }) => {
 
     return unsubscribe;
   }, [
+    auth,
     auth.currentUser,
     authData.signedIn,
-    authStateChanged,
+    // authStateChanged,
     currentUserProfile.settings,
     currentUserProfile.refetch,
   ]);
 
-  React.useEffect(() => {
-    if (auth.currentUser === undefined && currentUserProfile.data === null) {
-      signOutCurrentUser(currentUserProfileDispatch, authDispatch);
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   console.log(`\x1b[45m SIGNING OUT \x1b[0m`);
+
+  //   if (
+  //     authData.signedIn === false &&
+  //     (auth.currentUser === undefined || auth.currentUser === null) &&
+  //     currentUserProfile.data === null
+  //   ) {
+  //     resetCurrentUserProfile(currentUserProfileDispatch);
+  //     authDispatch({
+  //       type: "SIGN_IN",
+  //       payload: false,
+  //     });
+  //     signOutCurrentUser(currentUserProfileDispatch, authDispatch);
+  //   }
+  // }, [
+  //   auth.currentUser,
+  //   authData.signedIn,
+  //   // authStateChanged,
+  //   currentUserProfile.settings,
+  //   currentUserProfile.refetch,
+  // ]);
+
+  // React.useEffect(() => {
+  //   if (authData.signedIn === false || authData.signedIn === null) {
+  //     resetCurrentUserProfile(currentUserProfileDispatch);
+  //     authDispatch({
+  //       type: "SIGN_IN",
+  //       payload: false,
+  //     });
+  //   }
+  // }, [authData.signedIn]);
 
   // React.useEffect(() => {
   //   if (authData.signedIn === false) {
