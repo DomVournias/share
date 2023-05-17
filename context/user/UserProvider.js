@@ -48,11 +48,11 @@ export const UserProfileProvider = ({ children }) => {
     return unsubscribe;
   }, [
     auth,
-    auth.currentUser,
+    // auth.currentUser,
     authData.signedIn,
     // authStateChanged,
-    currentUserProfile.settings,
-    currentUserProfile.refetch,
+    // currentUserProfile.settings,
+    // currentUserProfile.refetch,
   ]);
 
   // React.useEffect(() => {
