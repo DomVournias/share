@@ -48,9 +48,9 @@ export const UserProfileProvider = ({ children }) => {
     return unsubscribe;
   }, [
     auth,
-    // auth.currentUser,
+    auth.currentUser,
     authData.signedIn,
-    // authStateChanged,
+    authStateChanged,
     // currentUserProfile.settings,
     // currentUserProfile.refetch,
   ]);

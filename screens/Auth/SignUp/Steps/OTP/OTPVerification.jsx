@@ -29,7 +29,8 @@ const OTPVerification = () => {
       loadingDispatch,
       messageDispatch,
       { authData },
-      navigation
+      navigation,
+      authDispatch
     );
   };
 

@@ -86,7 +86,8 @@ export const confirmVerificationCode = async (
   loadingDispatch,
   messageDispatch,
   { authData },
-  navigation
+  navigation,
+  authDispatch
 ) => {
   try {
     setLoading(loadingDispatch, true);
@@ -114,14 +115,17 @@ export const confirmVerificationCode = async (
         //   signedIn: true,
         //   message: "User already exists 👍",
         // }));
-        setMessage(messageDispatch, "User already exists 👍");
+        setMessage(messageDispatch, "Signed in successfully! 👍");
+
+        signInCurrentUser(authDispatch);
 
         // Signed in value assigned to local storage
-        await AsyncStorage.setItem("signedIn", "true");
-        setLoading(loadingDispatch, false);
-        setTimeout(() => {
-          navigation.navigate("Home");
-        }, 1500);
+        // await AsyncStorage.setItem("signedIn", "true");
+
+        // setLoading(loadingDispatch, false);
+        // setTimeout(() => {
+        //   navigation.navigate("Home");
+        // }, 1500);
       } else {
         setMessage(messageDispatch, "User doesn't exist 👍");
         setLoading(loadingDispatch, false);
