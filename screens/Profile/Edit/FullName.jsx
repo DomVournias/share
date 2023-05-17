@@ -1,4 +1,10 @@
-import { Field, Fields, Label, Paragraph } from "styles/EditProfile.styles";
+import {
+  Field,
+  Fields,
+  Label,
+  Paragraph,
+  ParagraphBottom,
+} from "styles/EditProfile.styles";
 import { Keyboard, Pressable } from "react-native";
 import { Text, View } from "react-native";
 import {
@@ -62,7 +68,15 @@ const EditProfileFullName = ({ route }) => {
     }));
   };
 
-  const discardFullNameUpdate = () => {};
+  const discardFullNameUpdate = () => {
+    setFullName((prevFullName) => ({
+      ...prevFullName,
+      firstName: "",
+      lastName: "",
+    }));
+
+    navigation.navigate("EditProfile");
+  };
 
   const saveFullNameUpdate = () => {
     const updatedFullName = {
@@ -101,11 +115,11 @@ const EditProfileFullName = ({ route }) => {
             />
           </Field>
         </Fields>
-        <Paragraph>
+        <ParagraphBottom>
           For accurate verification, kindly provide your first and last name
           exactly as on your government ID. Your cooperation ensures account
           security.
-        </Paragraph>
+        </ParagraphBottom>
       </Pressable>
     </Container>
   );

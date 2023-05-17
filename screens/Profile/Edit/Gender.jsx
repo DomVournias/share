@@ -1,3 +1,4 @@
+import { Paragraph, ParagraphTop } from "styles/EditProfile.styles";
 import { Text, View } from "react-native";
 
 import { CardStyleInterpolators } from "@react-navigation/stack";
@@ -58,6 +59,12 @@ const EditProfileGender = ({ route }) => {
   ]);
 
   const discardGenderUpdate = () => {
+    setGender((prevGender) => ({
+      ...prevGender,
+      isBinary: "",
+      binary: null,
+      nonBinary: "",
+    }));
     navigation.navigate("EditProfile");
   };
 
@@ -78,7 +85,10 @@ const EditProfileGender = ({ route }) => {
 
   return (
     <Container>
-      <Text>EditProfileGender</Text>
+      <ParagraphTop>
+        Your gender information will not be shared publicly and will only be
+        used as a search filter for user preferences.
+      </ParagraphTop>
       <GenderInputs
         mode={"settings"}
         tempGender={gender}
