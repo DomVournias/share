@@ -20,7 +20,7 @@ const ProfileHeader = (props) => {
   }, []);
   return (
     <Header color="white">
-      <StatusBar translucent={false} />
+      {/* <StatusBar translucent={false} /> */}
       <Button activeOpacity={0.8} onPress={() => navigation.goBack()}>
         <AntDesign name="left" size={25} color="black" style={styles.icon} />
       </Button>

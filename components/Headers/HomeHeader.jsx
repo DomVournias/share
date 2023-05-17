@@ -24,8 +24,6 @@ const HomeHeader = (props) => {
   const notifications = 2;
   return (
     <Header color="transparent">
-      <StatusBar translucent={false} />
-
       <Button activeOpacity={0.8} onPress={() => navigation.goBack()}>
         <View style={styles.icon}>
           {notifications > 0 ? (

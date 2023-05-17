@@ -27,8 +27,7 @@ const SettingsHeader = (props, { route }) => {
 
   // console.log(`\x1b[42m SettingsHeader \x1b[0m`, route);
   return (
-    <Header>
-      <StatusBar />
+    <Header color="white">
       <InnerLeft>
         <Button activeOpacity={0.8} onPress={handleDiscardActions}>
           <ButtonIcon name="ios-close-sharp" size={30} color="black" />

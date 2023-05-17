@@ -24,13 +24,14 @@ export const Wrapper = styled(View)`
 export const Header = styled(View)`
   /* flex: 1; */
   position: relative;
-  padding-top: 2%;
+  margin-top: ${`${StatusBar.currentHeight}px`};
   min-height: ${`${StatusBar.currentHeight * 2.2}px`};
   flex-direction: row;
   align-items: center;
   width: 100%;
   justify-content: space-between;
   background-color: ${(props) => props.color};
+  /* background-color: pink; */
 `;
 
 export const Title = styled(Text)`
