@@ -2,8 +2,10 @@ import { Text, TouchableOpacity } from "react-native";
 import { setRegistrationStep, setVehicle } from "context/auth/AuthActions";
 
 import { AuthContext } from "context/auth/AuthReducer";
+import ButtonField from "components/Inputs/ButtonField";
 import InputField from "components/Inputs/InputField";
 import { Picker } from "@react-native-picker/picker";
+import PickerField from "components/Inputs/PickerField";
 import React from "react";
 import { RegistrationSteps } from "screens/Auth/SignUp/Steps/template/RegistrationSteps";
 import { carBrands } from "utils/data/carBrands";
@@ -91,39 +93,24 @@ const VehicleRegistration = () => {
         Είσαγε το μοντέλο, το έτος και το χρώμα του οχήματος σου, αλλιώς πάτα
         "Δεν έχω όχημα".
       </Description>
-      <Brand activeOpacity={0.9} isFocused={handleInputFocus("brand")}>
-        <Picker
-          selectedValue={vehicleData.brand}
-          onValueChange={(value) => handleInputChange("brand", value)}
-        >
-          <Picker.Item
-            key={"unselectable"}
-            label="Μάρκα"
-            value={0}
-            style={{ fontSize: 17, color: "rgba(0,0,0,0.5)" }}
-          />
-          {carBrands.map((brand) => (
-            <Picker.Item key={brand} label={brand} value={brand} />
-          ))}
-        </Picker>
-      </Brand>
-      <Year activeOpacity={0.9} isFocused={handleInputFocus("year")}>
-        <Picker
-          selectedValue={vehicleData.year}
-          onValueChange={(value) => handleInputChange("year", value)}
-        >
-          <Picker.Item
-            key={"unselectable"}
-            label="Έτος"
-            value={0}
-            style={{ fontSize: 17, color: "rgba(0,0,0,0.5)" }}
-          />
-          {years.map((year) => (
-            <Picker.Item key={year} label={year.toString()} value={year} />
-          ))}
-        </Picker>
-      </Year>
+      <PickerField
+        toString={false}
+        value={vehicleData.brand}
+        onValueChange={(value) => handleInputChange("brand", value)}
+        label="Μάρκα"
+        list={carBrands}
+      />
+
+      <PickerField
+        toString={true}
+        value={vehicleData.year}
+        onValueChange={(value) => handleInputChange("year", value)}
+        label="Έτος"
+        list={years}
+      />
+
       <InputField
+        stickyBorder={vehicleData.color !== "" ? true : undefined}
         value={vehicleData.color}
         placeholder={"Χρώμα"}
         onFocus={() => null}

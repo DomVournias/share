@@ -6,12 +6,21 @@ import styled from "styled-components/native";
 const InputField = (props) => {
   const [isFocused, setIsFocused] = React.useState(false);
 
-  const handleInputFocus = () => {
+  const handleOnFocus = () => {
     setIsFocused(true);
     props.onFocus();
   };
 
-  // console.log(numberOfLines);
+  const handleOnBlur = () => {
+    if (props.stickyBorder === undefined) {
+      setIsFocused(false);
+    } else {
+      setIsFocused(true);
+    }
+  };
+
+  console.log(props.stickyBorder);
+
   return (
     <>
       <InputFieldStyled
@@ -22,8 +31,8 @@ const InputField = (props) => {
         autoCompleteType={props.autoCompleteType}
         onChangeText={props.onChangeText}
         isFocused={isFocused}
-        onFocus={handleInputFocus}
-        onBlur={() => setIsFocused(false)}
+        onFocus={handleOnFocus}
+        onBlur={handleOnBlur}
         maxLength={props.maxLength}
         multiline={props.textArea ? true : false}
         numberOfLines={props.textArea ? 2 : 1}
