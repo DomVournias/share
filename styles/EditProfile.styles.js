@@ -61,7 +61,14 @@ export const Input = styled(TextInput)`
 `;
 
 export const Paragraph = styled(Text)`
-  margin-top: 15px;
   font-size: 15px;
   opacity: 0.9;
+`;
+
+export const ParagraphTop = styled(Paragraph)`
+  margin-bottom: 20px;
+`;
+
+export const ParagraphBottom = styled(Paragraph)`
+  margin-top: 20px;
 `;

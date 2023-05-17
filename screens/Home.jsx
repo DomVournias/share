@@ -61,8 +61,7 @@ const Home = () => {
   return (
     <Container>
       {/* <MainMap /> */}
-      {/* <Settings /> */}
-      {/* <AuthLoading /> */}
+
       <FooterHome />
     </Container>
   );
