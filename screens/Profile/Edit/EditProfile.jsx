@@ -35,15 +35,13 @@ const EditProfile = ({ route }) => {
   const userData = currentUserProfile.data;
   const tempData = currentUserProfile.tempData;
 
-  const discardSettingsUpdates = () => {};
-  const saveSettingsUpdates = () => {};
-
   const {
     displayFirstName,
     displayLastName,
     displayGenderBinary,
     displayGenderIsBinary,
     displayGenderNonBinary,
+    displayBio,
   } = useDisplayValue(userData, tempData);
 
   React.useLayoutEffect(() => {
@@ -72,13 +70,16 @@ const EditProfile = ({ route }) => {
     saveSettingsUpdates,
   ]);
 
-  console.log(`\x1b[41m Gender display \x1b[0m`, displayGenderBinary);
+  const discardSettingsUpdates = () => {};
+  const saveSettingsUpdates = () => {};
 
-  console.log(`\x1b[41m Gender display \x1b[0m`, displayGenderIsBinary);
+  // console.log(`\x1b[41m TempData \x1b[0m`, tempData);
 
-  console.log(`\x1b[41m Gender display \x1b[0m`, displayGenderNonBinary);
+  // console.log(`\x1b[41m Userdata \x1b[0m`, userData);
 
-  console.log(`\x1b[46m Userdata \x1b[0m`, userData.gender);
+  // console.log(`\x1b[41m Gender display \x1b[0m`, displayGenderNonBinary);
+
+  // console.log(`\x1b[46m Display Bio \x1b[0m`, displayBio);
 
   return (
     <Container>
@@ -149,11 +150,15 @@ const EditProfile = ({ route }) => {
             <Label>Bio</Label>
             <ButtonField
               text={
-                userData.bio === ""
+                displayBio === ""
                   ? "Write something about yourself"
-                  : userData.bio
+                  : displayBio
               }
-              onPress={() => navigation.navigate("EditProfileBio")}
+              onPress={() =>
+                navigation.navigate("EditProfileBio", {
+                  displayBio,
+                })
+              }
             />
             {/* <InputField
               textArea={true}

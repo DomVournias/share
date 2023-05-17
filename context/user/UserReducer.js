@@ -3,6 +3,7 @@ import {
   RESET_CURRENT_USER_PROFILE,
   SET_CURRENT_USER_PROFILE,
   SET_CURRENT_USER_PROFILE_TYPE,
+  SET_TEMP_USER_PROFILE_BIO,
   SET_TEMP_USER_PROFILE_FULL_NAME,
   SET_TEMP_USER_PROFILE_GENDER,
   UPDATE_CURRENT_USER_PROFILE_IMAGE,
@@ -17,6 +18,7 @@ const initialTemptUserProfileState = {
   message: "",
   firstName: "",
   lastName: "",
+  bio: "",
   gender: {
     isBinary: null,
     binary: "",
@@ -85,6 +87,15 @@ export const CurrentUserProfileReducer = (state, action) => {
             ...state.tempData.gender,
             ...action.payload.gender,
           },
+        },
+      };
+
+    case SET_TEMP_USER_PROFILE_BIO:
+      return {
+        ...state,
+        tempData: {
+          ...state.tempData,
+          bio: action.payload.bio,
         },
       };
 

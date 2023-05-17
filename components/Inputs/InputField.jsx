@@ -42,7 +42,7 @@ const InputFieldStyled = styled(TextInput)`
   /* flex: 1; */
   min-height: 55px;
   font-size: 17px;
-  text-transform: capitalize;
+  text-transform: ${(props) => (props.multiline ? "none" : "capitalize")};
   padding: 12px 15px;
   background-color: rgba(0, 0, 0, 0.08);
   border-radius: 8px;

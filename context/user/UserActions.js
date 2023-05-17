@@ -37,6 +37,13 @@ export const setTempUserProfileGender = (dispatch, data) => {
   });
 };
 
+export const setTempUserProfileBio = (dispatch, payload) => {
+  dispatch({
+    type: "SET_TEMP_USER_PROFILE_BIO",
+    payload,
+  });
+};
+
 export const updateCurrentUserProfile = (dispatch, { userData }) => {
   dispatch({
     type: "UPDATE_CURRENT_USER_PROFILE",

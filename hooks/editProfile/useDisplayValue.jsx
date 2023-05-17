@@ -29,11 +29,17 @@ export const useDisplayValue = (userData, tempData) => {
       ? tempData.gender.nonBinary
       : userData.gender.nonBinary;
 
+  const displayBio =
+    userData.bio !== tempData.bio && tempData.bio !== ""
+      ? tempData.bio
+      : userData.bio;
+
   return {
     displayFirstName,
     displayLastName,
     displayGenderBinary,
     displayGenderIsBinary,
     displayGenderNonBinary,
+    displayBio,
   };
 };
